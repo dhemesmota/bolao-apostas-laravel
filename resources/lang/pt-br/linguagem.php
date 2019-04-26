@@ -54,5 +54,12 @@ return [
     'privacy_policy'=>'Politica de Privacidade',
     'terms_of_use'=>'Termos de Uso',
     'copyright'=>'Direito autoral',
-    'access_denied'=>'Acesso negado!'
+    'access_denied'=>'Acesso negado!',
+    'title'=>'Título',
+    'current_round'=>'Rodada atual',
+    'value_result'=>'Valor resultado',
+    'extra_value'=>'Valor extra',
+    'value_fee'=>'Taxa',
+    'betting_list'=>'Apostas',
+    'bet'=>'Aposta'
 ];

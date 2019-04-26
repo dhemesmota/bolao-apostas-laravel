@@ -47,6 +47,14 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role');
     }
 
+    /*
+    * Relacionamento entre usuario e apostas. Um usuário pode ter varias apostas (bolões)
+    */
+    public function bettings()
+    {
+        return $this->hasMany('App\Betting');
+    }
+
     // Verificar se tem papel
     public function hasRoles($roles)// Recebe uma lista de papeis
     {

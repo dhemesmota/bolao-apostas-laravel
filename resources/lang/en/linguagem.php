@@ -54,5 +54,12 @@ return [
     'privacy_policy'=>'Privacy Policy',
     'terms_of_use'=>'Terms of Use',
     'copyright'=>'Copyright',
-    'access_denied'=>'Access denied!'
+    'access_denied'=>'Access denied!',
+    'title'=>'Title',
+    'current_round'=>'Current round',
+    'value_result'=>'Value result',
+    'extra_value'=>'Extra value',
+    'value_fee'=>'Value fee',
+    'betting_list'=>'Bettings',
+    'bet'=>'Bet'
 ];
