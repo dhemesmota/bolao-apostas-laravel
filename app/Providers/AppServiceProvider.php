@@ -21,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
         'App\Repositories\Eloquent\PermissionRepository');
         $this->app->bind('App\Repositories\Contracts\RoleRepositoryInterface',
         'App\Repositories\Eloquent\RoleRepository');
+        $this->app->bind('App\Repositories\Contracts\BettingRepositoryInterface',
+        'App\Repositories\Eloquent\BettingRepository');
     }
 
     /**

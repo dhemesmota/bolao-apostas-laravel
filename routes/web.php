@@ -53,6 +53,7 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function (
     Route::put('/users/{user}','UserController@update')->name('users.update')->middleware('can:edit-user');
     Route::delete('/users/{user}','UserController@destroy')->name('users.destroy')->middleware('can:delete-user');
     */
+    Route::resource('/bettings', 'BettingController');
 });
 
 Route::prefix('admin')->middleware(['auth','can:acl'])->namespace('Admin')->group(function () {
