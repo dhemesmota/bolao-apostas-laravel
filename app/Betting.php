@@ -22,4 +22,25 @@ class Betting extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * Sempre colocar no padrão primeira letra maiuscula
+     * Usar o method acessor sempre que quiser usar um valor
+     * que não esteja nos atributos acima
+     * 
+     * acessores sempre tem o get...Attribute
+     * fazendo relacionamento com o usuario e retornando o nome
+     */
+    public function getUserNameAttribute($value)
+    {
+        return $this->user->name;
+    }
+
+    /**
+     * Relacionamento um para muitos
+     */
+    public function rounds()
+    {
+        return $this->hasMany('App\Round');
+    }
 }

@@ -4,18 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\Contracts\BettingRepositoryInterface;
+use App\Repositories\Contracts\RoundRepositoryInterface;
 use Validator;
 
-class BettingController extends Controller
+class RoundController extends Controller
 {
 
-    private $route = 'bettings';
+    private $route = 'rounds';
     private $paginate = 10;
     private $search = ['title'];
     private $model;
 
-    public function __construct(BettingRepositoryInterface $model)
+    public function __construct(RoundRepositoryInterface $model)
     {
         $this->model = $model;
     }
@@ -33,11 +33,9 @@ class BettingController extends Controller
         $columnList = [
             'id'=>'#',
             'title'=>trans('linguagem.title'), 
-            'user_name'=>trans('linguagem.name'), 
-            'current_round'=>trans('linguagem.current_round'), 
-            'value_result' => trans('linguagem.value_result'), 
-            'extra_value' => trans('linguagem.extra_value'),
-            'value_fee' => trans('linguagem.value_fee')
+            'betting_title'=>trans('linguagem.betting_title'), // na Model está como getBettingTitleAttribute
+            'date_start' => trans('linguagem.date_start'),
+            'date_end' => trans('linguagem.date_end')
         ];
 
         $search = "";
@@ -49,7 +47,7 @@ class BettingController extends Controller
             //$list = $this->model->all(); // trás todos os usuários
         }
 
-        $page = trans('linguagem.betting_list'); // traduzindo o titulo da lista
+        $page = trans('linguagem.round_list'); // traduzindo o titulo da lista
 
         $routeName = $this->route; // passando a rota - caminho
 
@@ -72,8 +70,8 @@ class BettingController extends Controller
     public function create()
     {
 
-        $page = trans('linguagem.betting_list'); // traduzindo o titulo da lista
-        $page_create = trans('linguagem.bet');
+        $page = trans('linguagem.round_list'); // traduzindo o titulo da lista
+        $page_create = trans('linguagem.round');
         $routeName = $this->route; // passando a rota - caminho
 
         $breadcrumb = [
@@ -97,9 +95,8 @@ class BettingController extends Controller
 
         Validator::make($data, [
             'title' => ['required', 'string', 'min:4', 'max:255'],
-            'value_result' => ['required'],
-            'extra_value' => ['required'],
-            'value_fee' => ['required']
+            'date_start' => ['required'],
+            'date_end' => ['required']
         ])->validate();
 
         if($this->model->create($data)){
@@ -126,8 +123,8 @@ class BettingController extends Controller
         $register = $this->model->find($id);
         if($register){
             
-            $page = trans('linguagem.betting_list'); // traduzindo o titulo da lista
-            $page2 = trans('linguagem.bet');
+            $page = trans('linguagem.round_list'); // traduzindo o titulo da lista
+            $page2 = trans('linguagem.round');
 
             $breadcrumb = [
                 (object)['url'=>route('home'),'title'=>trans('linguagem.home')],
@@ -163,8 +160,8 @@ class BettingController extends Controller
         $register = $this->model->find($id);
         if($register){
             
-            $page = trans('linguagem.betting_list'); // traduzindo o titulo da lista
-            $page2 = trans('linguagem.bet');
+            $page = trans('linguagem.round_list'); // traduzindo o titulo da lista
+            $page2 = trans('linguagem.round');
 
             $breadcrumb = [
                 (object)['url'=>route('home'),'title'=>trans('linguagem.home')],
@@ -192,9 +189,8 @@ class BettingController extends Controller
 
         Validator::make($data, [
             'title' => ['required', 'string', 'min:4', 'max:255'],
-            'value_result' => ['required'],
-            'extra_value' => ['required'],
-            'value_fee' => ['required']
+            'date_start' => ['required'],
+            'date_end' => ['required']
         ])->validate();
 
         if($this->model->update($data,$id)){

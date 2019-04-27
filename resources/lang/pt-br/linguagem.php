@@ -61,5 +61,10 @@ return [
     'extra_value'=>'Valor extra',
     'value_fee'=>'Taxa',
     'betting_list'=>'Apostas',
-    'bet'=>'Aposta'
+    'bet'=>'Aposta',
+    'betting_title'=>'Bolão',
+    'date_start'=>'Data de inicio',
+    'data_end'=>'Data fim',
+    'round_list'=>'Rodadas',
+    'round'=>'Rodada'
 ];
