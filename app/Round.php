@@ -9,7 +9,7 @@ class Round extends Model
     protected $fillable = [
         'betting_id',
         'title',
-        'date_start', 
+        'date_start',
         'date_end'
     ];
 
@@ -28,5 +28,36 @@ class Round extends Model
     public function getBettingTitleAttribute()
     {
         return ucfirst($this->betting->title); // ucfirst - transforma o primeiro caractere em maiuscula
+    }
+
+    /**
+     * Mudar formato da data que será cadastrada no banco
+     */
+    public function setDateStartAttribute($value)
+    {
+        $date = date_create($value);
+
+        $this->attributes['date_start'] = date_format($date, 'Y-m-d H:i:s');
+    }
+    public function setDateEndAttribute($value)
+    {
+        $date = date_create($value);
+
+        $this->attributes['date_end'] = date_format($date, 'Y-m-d H:i:s');
+    }
+
+    /**
+     * Mudando o formato da data para exibir ao usuário
+     * Obs: Mudar na controler a lista que é enviada para view, utilizar date_start_site
+     */
+    public function getDateStartSiteAttribute()
+    {
+        $date = date_create($this->date_start);
+        return date_format($date, 'd/m/Y \a\s H:i');
+    }
+    public function getDateEndSiteAttribute()
+    {
+        $date = date_create($this->date_end);
+        return date_format($date, 'd/m/Y \a\s H:i');
     }
 }

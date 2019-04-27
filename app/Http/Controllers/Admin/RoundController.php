@@ -12,7 +12,7 @@ class RoundController extends Controller
 
     private $route = 'rounds';
     private $paginate = 10;
-    private $search = ['title'];
+    private $search = ['title','id'];
     private $model;
 
     public function __construct(RoundRepositoryInterface $model)
@@ -33,9 +33,9 @@ class RoundController extends Controller
         $columnList = [
             'id'=>'#',
             'title'=>trans('linguagem.title'), 
-            'betting_title'=>trans('linguagem.betting_title'), // na Model está como getBettingTitleAttribute
-            'date_start' => trans('linguagem.date_start'),
-            'date_end' => trans('linguagem.date_end')
+            'betting_title'=>trans('linguagem.bet'), // na Model está como getBettingTitleAttribute
+            'date_start_site' => trans('linguagem.date_start'),
+            'date_end_site' => trans('linguagem.date_end')
         ];
 
         $search = "";
@@ -74,13 +74,17 @@ class RoundController extends Controller
         $page_create = trans('linguagem.round');
         $routeName = $this->route; // passando a rota - caminho
 
+        // Lista de boloes do usuario logado
+        $user = auth()->user();
+        $listRel = $user->bettings()->orderBy('id','desc')->get(); // buscando a lista de bolões
+
         $breadcrumb = [
             (object)['url'=>route('home'),'title'=>trans('linguagem.home')],
             (object)['url'=>route($routeName.'.index'),'title'=>trans('linguagem.list',['page'=>$page])],
             (object)['url'=>'','title'=>trans('linguagem.create_crud',['page'=>$page_create])]
         ];
 
-        return view('admin.'.$routeName.'.create',compact('page','page_create','routeName','breadcrumb'));
+        return view('admin.'.$routeName.'.create',compact('page','page_create','routeName','breadcrumb','listRel'));
     }
 
     /**
@@ -95,6 +99,7 @@ class RoundController extends Controller
 
         Validator::make($data, [
             'title' => ['required', 'string', 'min:4', 'max:255'],
+            'betting_id' => ['required'],
             'date_start' => ['required'],
             'date_end' => ['required']
         ])->validate();
@@ -163,13 +168,18 @@ class RoundController extends Controller
             $page = trans('linguagem.round_list'); // traduzindo o titulo da lista
             $page2 = trans('linguagem.round');
 
+            // Lista de boloes do usuario logado
+            $user = auth()->user();
+            $listRel = $user->bettings()->orderBy('id','desc')->get(); // buscando a lista de bolões
+            $register_id = $register->betting_id;
+
             $breadcrumb = [
                 (object)['url'=>route('home'),'title'=>trans('linguagem.home')],
                 (object)['url'=>route($routeName.'.index'),'title'=>trans('linguagem.list',['page'=>$page])],
                 (object)['url'=>'','title'=>trans('linguagem.edit_crud',['page'=>$page2])]
             ];
 
-            return view('admin.'.$routeName.'.edit',compact('register','page','page2','routeName','breadcrumb'));
+            return view('admin.'.$routeName.'.edit',compact('register','page','page2','routeName','breadcrumb','listRel','register_id'));
         }
 
         // Caso não encontre o usuário retornar para lista de usuários
@@ -189,6 +199,7 @@ class RoundController extends Controller
 
         Validator::make($data, [
             'title' => ['required', 'string', 'min:4', 'max:255'],
+            'betting_id' => ['required'],
             'date_start' => ['required'],
             'date_end' => ['required']
         ])->validate();

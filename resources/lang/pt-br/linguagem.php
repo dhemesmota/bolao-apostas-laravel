@@ -64,7 +64,7 @@ return [
     'bet'=>'Aposta',
     'betting_title'=>'Bolão',
     'date_start'=>'Data de inicio',
-    'data_end'=>'Data fim',
+    'date_end'=>'Data fim',
     'round_list'=>'Rodadas',
     'round'=>'Rodada'
 ];
