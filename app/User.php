@@ -62,6 +62,19 @@ class User extends Authenticatable
         return $roles->intersect($userRoles)->count();
     }
 
+    /**
+     * Relacionamento com rodadas
+     */
+    public function getRoundsAttribute()
+    {
+        $bettings = $this->bettings;
+        $rounds = [];
+        foreach ($bettings as $key => $value) {
+            $rounds[] = $value->rounds;
+        }
+        return array_collapse($rounds);
+    }
+
     // Verificar se é administrador porque o administrador vai ter acesso total
     public function isAdmin()
     {

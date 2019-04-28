@@ -22,6 +22,14 @@ class Round extends Model
     }
 
     /**
+     * Relacionamento com partidas
+     */
+    public function matches()
+    {
+        return $this->hasMany('App\Match');
+    }
+
+    /**
      * Definindo o method acessor
      * acessando o method acima para buscar o titulo do betting
      */
