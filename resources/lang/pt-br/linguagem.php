@@ -66,5 +66,15 @@ return [
     'date_start'=>'Data de inicio',
     'date_end'=>'Data fim',
     'round_list'=>'Rodadas',
-    'round'=>'Rodada'
+    'round'=>'Rodada',
+    'stadium'=>'Estádio',
+    'team_a'=>'Time A',
+    'team_b'=>'Time B',
+    'result'=>'Resultado',
+    'scoreboard_a'=>'Placar A',
+    'scoreboard_b'=>'Placar B',
+    'date'=>'Data',
+    'match_list'=>'Partidas',
+    'match'=>'Partida',
+    'result_description'=>'(A - Time A, B - Time B, E - Empate)',
 ];

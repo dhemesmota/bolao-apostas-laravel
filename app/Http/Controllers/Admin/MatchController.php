@@ -4,18 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\Contracts\RoundRepositoryInterface;
+use App\Repositories\Contracts\MatchRepositoryInterface;
 use Validator;
 
-class RoundController extends Controller
+class MatchController extends Controller
 {
 
-    private $route = 'rounds';
+    private $route = 'matches';
     private $paginate = 10;
-    private $search = ['title','id'];
+    private $search = ['title','stadium','team_a','team_b',];
     private $model;
 
-    public function __construct(RoundRepositoryInterface $model)
+    public function __construct(MatchRepositoryInterface $model)
     {
         $this->model = $model;
     }
@@ -31,11 +31,15 @@ class RoundController extends Controller
 
         // Definiando as colunas e traduzação das colunas
         $columnList = [
-            'id'=>'#',
-            'title'=>trans('linguagem.title'), 
-            'betting_title'=>trans('linguagem.bet'), // na Model está como getBettingTitleAttribute
-            'date_start_site' => trans('linguagem.date_start'),
-            'date_end_site' => trans('linguagem.date_end')
+            'id' => '#',
+            'title' => trans('linguagem.title'),
+            'stadium' => trans('linguagem.stadium'), // na Model está como getBettingTitleAttribute
+            'team_a' => trans('linguagem.team_a'),
+            'team_b' => trans('linguagem.team_b'),
+            'result' => trans('linguagem.result'),
+            'scoreboard_a' => trans('linguagem.scoreboard_a'),
+            'scoreboard_b' => trans('linguagem.scoreboard_b'),
+            'date' => trans('linguagem.date')
         ];
 
         $search = "";
@@ -47,7 +51,7 @@ class RoundController extends Controller
             //$list = $this->model->all(); // trás todos os usuários
         }
 
-        $page = trans('linguagem.round_list'); // traduzindo o titulo da lista
+        $page = trans('linguagem.match_list'); // traduzindo o titulo da lista
 
         $routeName = $this->route; // passando a rota - caminho
 
@@ -70,8 +74,8 @@ class RoundController extends Controller
     public function create()
     {
 
-        $page = trans('linguagem.round_list'); // traduzindo o titulo da lista
-        $page_create = trans('linguagem.round');
+        $page = trans('linguagem.match_list'); // traduzindo o titulo da lista
+        $page_create = trans('linguagem.match');
         $routeName = $this->route; // passando a rota - caminho
 
         // Lista de boloes do usuario logado
@@ -98,10 +102,14 @@ class RoundController extends Controller
         $data = $request->all();
 
         Validator::make($data, [
-            'title' => ['required', 'string', 'min:4', 'max:255'],
-            'betting_id' => ['required'],
-            'date_start' => ['required'],
-            'date_end' => ['required']
+            'title' => 'required|string|max:255',
+            'stadium' => 'required',
+            'team_a' => 'required',
+            'team_b' => 'required',
+            'result' => 'required',
+            'scoreboard_a' => 'required',
+            'scoreboard_b' => 'required',
+            'date' => 'required',
         ])->validate();
 
         if($this->model->create($data)){
@@ -128,8 +136,8 @@ class RoundController extends Controller
         $register = $this->model->find($id);
         if($register){
             
-            $page = trans('linguagem.round_list'); // traduzindo o titulo da lista
-            $page2 = trans('linguagem.round');
+            $page = trans('linguagem.match_list'); // traduzindo o titulo da lista
+            $page2 = trans('linguagem.match');
 
             $breadcrumb = [
                 (object)['url'=>route('home'),'title'=>trans('linguagem.home')],
@@ -165,8 +173,8 @@ class RoundController extends Controller
         $register = $this->model->find($id);
         if($register){
             
-            $page = trans('linguagem.round_list'); // traduzindo o titulo da lista
-            $page2 = trans('linguagem.round');
+            $page = trans('linguagem.match_list'); // traduzindo o titulo da lista
+            $page2 = trans('linguagem.match');
 
             // Lista de boloes do usuario logado
             $user = auth()->user();
@@ -198,10 +206,14 @@ class RoundController extends Controller
         $data = $request->all();
 
         Validator::make($data, [
-            'title' => ['required', 'string', 'min:4', 'max:255'],
-            'betting_id' => ['required'],
-            'date_start' => ['required'],
-            'date_end' => ['required']
+            'title' => 'required|string|max:255',
+            'stadium' => 'required',
+            'team_a' => 'required',
+            'team_b' => 'required',
+            'result' => 'required',
+            'scoreboard_a' => 'required',
+            'scoreboard_b' => 'required',
+            'date' => 'required',
         ])->validate();
 
         if($this->model->update($data,$id)){

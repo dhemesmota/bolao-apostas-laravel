@@ -95,6 +95,21 @@
                                     <p class="text-muted">{{ __('linguagem.create_or_edit') }}</p>
                                 </div>
                             </div>    
+                            <!-- Permissão para listar partidas -->
+                            <div style="cursor:pointer" onclick="window.location = '{{ route('matches.index') }}'"  class="col-md-4 col-sm-6 portfolio-item">
+                                <a class="portfolio-link">
+                                    <div class="portfolio-hover">
+                                        <div class="portfolio-hover-content">
+                                        <i class="fas fa-plus fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    <img class="img-fluid" src="{{ asset('img/portfolio/01-thumbnail.jpg') }}" alt="">
+                                </a>
+                                <div class="portfolio-caption">
+                                    <h4>@lang('linguagem.list',['page'=>__('linguagem.match_list')])</h4>
+                                    <p class="text-muted">{{ __('linguagem.create_or_edit') }}</p>
+                                </div>
+                            </div>    
                         </div>
                     </span>
 

@@ -66,5 +66,15 @@ return [
     'date_start'=>'Initial date',
     'date_end'=>'Final date',
     'round_list'=>'Rounds',
-    'round'=>'Round'
+    'round'=>'Round',
+    'stadium'=>'Stadium',
+    'team_a'=>'Team A',
+    'team_b'=>'Team B',
+    'result'=>'Result',
+    'scoreboard_a'=>'Scoreboard A',
+    'scoreboard_b'=>'Scoreboard B',
+    'date'=>'Date',
+    'match_list'=>'Matches',
+    'match'=>'Match',
+    'result_description'=>'(A - Team A, B - Team B, E - Draw)',
 ];
